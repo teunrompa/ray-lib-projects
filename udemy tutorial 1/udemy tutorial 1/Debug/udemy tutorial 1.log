@@ -1,0 +1,8 @@
+﻿  Source.cpp
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\udemy tutorial 1\udemy tutorial 1\Source.cpp(12,35): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\udemy tutorial 1\udemy tutorial 1\Source.cpp(12,35): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\udemy tutorial 1\udemy tutorial 1\Source.cpp(26,33): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\udemy tutorial 1\udemy tutorial 1\Source.cpp(26,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\udemy tutorial 1\udemy tutorial 1\Source.cpp(28,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\udemy tutorial 1\udemy tutorial 1\Source.cpp(28,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  udemy tutorial 1.vcxproj -> C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\udemy tutorial 1\Debug\udemy tutorial 1.exe
