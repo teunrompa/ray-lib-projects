@@ -1,0 +1,10 @@
+﻿  Dasher.cpp
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\UdemyRunnerGame\UdemyRunnerGame\Dasher.cpp(24,41): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\UdemyRunnerGame\UdemyRunnerGame\Dasher.cpp(24,41): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\UdemyRunnerGame\UdemyRunnerGame\Dasher.cpp(24,52): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\UdemyRunnerGame\UdemyRunnerGame\Dasher.cpp(24,52): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\UdemyRunnerGame\UdemyRunnerGame\Dasher.cpp(25,34): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\UdemyRunnerGame\UdemyRunnerGame\Dasher.cpp(25,34): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\UdemyRunnerGame\UdemyRunnerGame\Dasher.cpp(25,53): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\UdemyRunnerGame\UdemyRunnerGame\Dasher.cpp(25,53): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  UdemyRunnerGame.vcxproj -> C:\Users\teunr\source\repos\TopDownShooter\ray-lib-projects\UdemyRunnerGame\Debug\UdemyRunnerGame.exe
