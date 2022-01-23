@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <iostream>
 
 void Game::InitGame() 
 {
@@ -36,6 +37,30 @@ void Game::DrawMap()
 	DrawTextureEx(map, mapPos, 0, mapScale, WHITE);
 }
 
+void Game::CheckIfPlayerIsInWorld()
+{
+	if (player.position.x > worldSize.x)
+	{
+		camera.target = Vector2{ worldSize.x + cameraTargetOffset, player.position.y + cameraTargetOffset };
+	}
+	else if (player.position.x < 0)
+	{
+		camera.target = Vector2{ 0 + cameraTargetOffset , player.position.y + cameraTargetOffset };
+	}
+	else if (player.position.y < 0)
+	{
+		camera.target = Vector2{ player.position.x + cameraTargetOffset, 0 + cameraTargetOffset };
+	}
+	else if (player.position.y > worldSize.y)
+	{
+		camera.target = Vector2{ player.position.x + cameraTargetOffset, worldSize.y + cameraTargetOffset };
+	}
+	else
+	{
+		camera.target = Vector2{ player.position.x + cameraTargetOffset, player.position.y + cameraTargetOffset };
+	}
+}
+
 //Write your Game Code here...
 void Game::UpdateGame()
 {
@@ -45,14 +70,9 @@ void Game::UpdateGame()
 
 	DrawMap();
 
-	player.UpdatePlayer();
-
-	//check if the player is at the edge of the screen
-	if (camera.target.x <= worldSize.x)
-	{
-		camera.target = Vector2{ player.position.x + cameraTargetOffset, player.position.y + cameraTargetOffset};
-	}
-
+	player.UpdatePlayer(camera);
+	
+	CheckIfPlayerIsInWorld();
 
 	EndDrawingGame();
 }

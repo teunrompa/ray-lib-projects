@@ -1,5 +1,2 @@
-﻿  Game.cpp
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(5,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(5,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(13,43): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+﻿  Player.cpp
   ClashyClash.vcxproj -> C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\Debug\ClashyClash.exe

@@ -14,10 +14,9 @@ public:
 	void GameShouldStop();
 
 	//Public objects
+	Vector2 cameraOffset{ screenSize.x / 2, screenSize.y / 2 };
+	Camera2D camera{ cameraOffset, player.position , 0, 1 };
 	Player player;
-	Vector2 cameraOffset{screenSize.x / 2, screenSize.y / 2};
-	Camera2D camera{cameraOffset, player.position , 0, 1};
-
 
 private:
 
@@ -26,6 +25,8 @@ private:
 	void ClearGameScreen();
 	void EndDrawingGame();
 	void DrawMap();
+	void CheckIfPlayerIsInWorld();
+
 
 	//Game values
 	Texture2D map;

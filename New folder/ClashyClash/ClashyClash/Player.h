@@ -1,7 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include "raymath.h"
-
+#include <iostream>
 
 class Player
 {
@@ -12,7 +12,7 @@ public:
 	Vector2 mousePos = GetMousePosition();
 
 	void Init();
-	void UpdatePlayer(); //updates all the players code
+	void UpdatePlayer(Camera2D camera); //updates all the players code
 
 	//Check if the player has reached the edge of the map
 	bool isPlayerInMap = true;
@@ -21,12 +21,16 @@ public:
 
 private:
 
+
+	Rectangle sourceRec;
+	Rectangle playerDest;
+	Vector2 origin;
+
 	float dt{0};
 
 	void Draw();
-	void Update(); //updates the player logic
-
-	void LookAtMouse();
+	void Update(Camera2D camera); //updates the player logic
+	void LookAtMouse(Camera2D camera);
 	void MovePlayer();
 
 	float scale {3};
