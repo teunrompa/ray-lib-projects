@@ -1,6 +1,9 @@
 #pragma once
 #include "Player.h"
 #include "raylib.h"
+#include <iostream>
+
+#define LOG(x) std::cout << (x) << std::endl;
 
 class Game
 {

@@ -8,11 +8,17 @@ void Player::Init()
 	playerDest = { position.x, position.y, static_cast<float>(playerTexture.width) * scale, static_cast<float>(playerTexture.height) * scale };
 	sourceRec = {0,0, static_cast<float>(playerTexture.width), static_cast<float>(playerTexture.height)};
 	origin = {playerDest.height  / 2 , playerDest.width  /2};
+	weapon.initWeapon();
 }
 
 void Player::Draw() 
 {
 	DrawTexturePro(playerTexture, sourceRec, playerDest, origin, rotation, WHITE);
+
+	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+	{
+		weapon.Fire(position);
+	}
 }
 
 void Player::Update(Camera2D camera)
@@ -21,7 +27,6 @@ void Player::Update(Camera2D camera)
 	MovePlayer();
 	LookAtMouse(camera);
 
-
 	mousePos = GetMousePosition();
 	playerDest.x = position.x;
 	playerDest.y = position.y;
@@ -29,7 +34,6 @@ void Player::Update(Camera2D camera)
 
 void Player::LookAtMouse(Camera2D camera)
 {
-	
 	rotation = Vector2Angle(position, GetScreenToWorld2D(mousePos, camera));
 }
 

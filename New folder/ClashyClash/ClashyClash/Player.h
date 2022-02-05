@@ -2,10 +2,14 @@
 #include <raylib.h>
 #include "raymath.h"
 #include <iostream>
+#include "Weapon.h"
 
 class Player
 {
 public:
+
+	
+	Weapon weapon;
 
 	Vector2 position{ 0, 0 };
 	Vector2 moveVel{0, 0}; // the direction where the player is going
@@ -17,7 +21,6 @@ public:
 	//Check if the player has reached the edge of the map
 	bool isPlayerInMap = true;
 	Texture2D playerTexture;
-
 
 private:
 
