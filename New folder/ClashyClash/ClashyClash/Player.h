@@ -2,14 +2,13 @@
 #include <raylib.h>
 #include "raymath.h"
 #include <iostream>
-#include "Weapon.h"
+#include <vector>
+#include "Projectile.h"
 
 class Player
 {
 public:
-
-	
-	Weapon weapon;
+	std::vector<Projectile>	projectiles;
 
 	Vector2 position{ 0, 0 };
 	Vector2 moveVel{0, 0}; // the direction where the player is going
@@ -23,21 +22,24 @@ public:
 	Texture2D playerTexture;
 
 private:
-
-
 	Rectangle sourceRec;
 	Rectangle playerDest;
 	Vector2 origin;
-
-	float dt{0};
 
 	void Draw();
 	void Update(Camera2D camera); //updates the player logic
 	void LookAtMouse(Camera2D camera);
 	void MovePlayer();
 
+	float dt{ 0 };
+
+	//Player info
 	float scale {3};
-	float rotation{0};
+	float rotation{90};
 	float speed{500};
+
+	//Fire logic
+	void Fire(float fireRate);
+	float coolDown = 0;
 };
 

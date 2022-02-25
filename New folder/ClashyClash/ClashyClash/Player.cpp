@@ -8,26 +8,25 @@ void Player::Init()
 	playerDest = { position.x, position.y, static_cast<float>(playerTexture.width) * scale, static_cast<float>(playerTexture.height) * scale };
 	sourceRec = {0,0, static_cast<float>(playerTexture.width), static_cast<float>(playerTexture.height)};
 	origin = {playerDest.height  / 2 , playerDest.width  /2};
-	weapon.initWeapon();
 }
 
 void Player::Draw() 
 {
 	DrawTexturePro(playerTexture, sourceRec, playerDest, origin, rotation, WHITE);
-
-	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-	{
-		weapon.Fire(position);
-	}
 }
 
 void Player::Update(Camera2D camera)
 {
 	dt = GetFrameTime();
+
+
 	MovePlayer();
 	LookAtMouse(camera);
 
+	Fire(0.2f);
+
 	mousePos = GetMousePosition();
+
 	playerDest.x = position.x;
 	playerDest.y = position.y;
 }
@@ -50,11 +49,38 @@ void Player::MovePlayer()
 		moveVel.x *= speed * dt;
 		moveVel.y *= speed * dt;
 		position = Vector2Add(position, moveVel);
-		//std::cout << position.x << "" << position.y << std::endl;
 	}
 
 	moveVel.x = 0;
 	moveVel.y = 0;
+}
+
+void Player::Fire(float fireRate)
+{
+	coolDown += dt;
+	
+	//add a projectile to the projectiles vector
+	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && fireRate < coolDown)
+	{
+		Projectile projectile;
+
+		projectile.Init(position, rotation);
+
+		projectiles.push_back(projectile);
+
+		coolDown = 0;
+	}
+
+	//loop trough the projectiles and update them
+	for (int i = projectiles.size() - 1; i >= 0; i--)
+	{
+		projectiles[i].Update(dt);
+
+		if(!projectiles[i].active)
+		{
+			projectiles.erase(projectiles.begin() + i);
+		}
+	}
 }
 
 void Player::UpdatePlayer(Camera2D camera) 

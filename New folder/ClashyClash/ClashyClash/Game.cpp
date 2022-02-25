@@ -6,6 +6,7 @@ void Game::InitGame()
 	
 	map = LoadTexture("nature_tileset/OpenWorldMap24x24.png"); //load the map texture
 	worldSize = Vector2{static_cast<float>(map.width) * mapScale, static_cast<float>(map.height) * mapScale}; //make the world size based on the map texture
+	worldBounds = {0,0, worldSize.x, worldSize.y};
 
 	//Init all the objects here...
 	player.Init();

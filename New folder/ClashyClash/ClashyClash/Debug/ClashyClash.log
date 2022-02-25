@@ -1,2 +1,4 @@
-﻿  Weapon.cpp
+﻿  Projectile.cpp
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Projectile.cpp(12,34): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Projectile.cpp(13,35): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   ClashyClash.vcxproj -> C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\Debug\ClashyClash.exe
