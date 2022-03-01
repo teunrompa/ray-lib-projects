@@ -26,8 +26,9 @@ void Projectile::UpdatePosition(float dt)
 	velocity.y *= speed * dt;
 
 	position = Vector2Add(position, velocity);
-	hitBox.x = position.x;
-	hitBox.y = position.y;
+
+	hitBox.x = position.x - projectileTexture.width / 2;
+	hitBox.y = position.y - projectileTexture.height / 2;
 
 	destRec.x = position.x;
 	destRec.y = position.y;
@@ -59,6 +60,6 @@ void Projectile::Update(float dt)
 
 void Projectile::Draw()
 {
-	DrawTexturePro(projectileTexture, source, destRec, origin, rotation, RAYWHITE);
 	DrawRectangleRec(hitBox, RED);
+	DrawTexturePro(projectileTexture, source, destRec, origin, rotation, RAYWHITE);
 }

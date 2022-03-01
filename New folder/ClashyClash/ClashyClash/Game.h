@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 
+#include "Prop.h"
+
 
 #define LOG(x) std::cout << (x) << std::endl;
 
@@ -20,8 +22,13 @@ public:
 
 	//Public objects
 	Vector2 cameraOffset{ screenSize.x / 2, screenSize.y / 2 };
+
 	Camera2D camera{ cameraOffset, player.position , 0, 1 };
+
 	Player player;
+	Prop rock;
+	Prop props[2];
+
 	Rectangle worldBounds;
 
 private:

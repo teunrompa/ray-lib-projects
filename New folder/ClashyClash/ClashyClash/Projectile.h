@@ -10,6 +10,7 @@ public:
 	void Init(Vector2 position, float rotation);
 
 	bool active = true;
+	bool hitObj = false; //TODO: implement collision width objects
 
 private:
 

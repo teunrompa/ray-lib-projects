@@ -12,6 +12,9 @@ void Game::InitGame()
 	player.Init();
 	player.position = Vector2{screenSize.x / 2, screenSize.y / 2};
 	cameraTargetOffset = player.playerTexture.width;
+
+	rock.Init(Vector2{200, 600}, LoadTexture("nature_tileset/Rock.png"));
+
 }
 
 void Game::DrawGame()
@@ -71,7 +74,8 @@ void Game::UpdateGame()
 	DrawMap();
 
 	player.UpdatePlayer(camera);
-	
+	rock.Render();
+
 	CheckIfPlayerIsInWorld();
 
 	EndDrawingGame();
