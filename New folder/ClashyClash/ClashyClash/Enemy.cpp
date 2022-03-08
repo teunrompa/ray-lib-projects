@@ -27,10 +27,13 @@ void Enemy::Update(const float dt)
 
 		velocity = Vector2Scale(velocity, speed * dt);
 		position = Vector2Add(position, velocity);
+
+		isAnimationReset = false;
 	}else
 	{
 		Freeze();
 	}
+	DrawRectangleRec(getCollisionRec(), RED);
 	BaseCharacter::Update(dt);
 }
 
@@ -39,22 +42,35 @@ void Enemy::setTarget(Character* target)
 	this->target = target;
 }
 
+void Enemy::setFrozen(const bool frozen)
+{
+	this->frozen = frozen;
+}
+
+
 void Enemy::Freeze()
 {
 	//reset all animation data
 	if(!isAnimationReset)
 	{
 		isAnimationReset = true;
-		resetAnimationFrames();
+		ResetAnimationData(&enemyFrozen, 5, 1);
 	}
-
-	texture = enemyFrozen;
-	maxAnimationFrames = 5;
-	width = enemyFrozen.width / maxAnimationFrames;
-	updateTime = 1;
-	if (maxAnimationFrames == currentAnimationFrame)
+	if (maxAnimationFrames <= currentAnimationFrame)
 	{
 		frozen = false;
 	}
 }
+
+Rectangle Enemy::getCollisionRec()
+{
+	float modifier = 0.7f;
+	return Rectangle{
+		position.x - width * scale / 2 * modifier,
+		position.y - height * scale / 2 ,
+		width * scale * modifier ,
+		height * scale
+	};
+}
+
 

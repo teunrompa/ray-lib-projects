@@ -28,6 +28,16 @@ void BaseCharacter::unsetMovement()
 	position = worldPosLastFrame;
 }
 
+void BaseCharacter::ResetAnimationData(const Texture2D* new_texture, const int maxFrames, const float updateTime)
+{
+	currentAnimationFrame = 0;
+	maxAnimationFrames = maxFrames;
+	this->updateTime = updateTime;
+	runningTime = 0;
+	this->width = new_texture->width / maxAnimationFrames;
+	texture = *new_texture;
+}
+
 Rectangle BaseCharacter::getCollisionRec()
 {
 	return Rectangle{

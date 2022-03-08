@@ -18,7 +18,7 @@ public:
 
 	virtual void Update(float dt);
 	void unsetMovement();
-	void resetAnimationFrames() { currentAnimationFrame = 0; }
+	void ResetAnimationData(const Texture2D* new_texture, const int maxFrames, const float updateTime);
 	Vector2 getPos() { return position; }
 	
 	int maxAnimationFrames{ 4 };

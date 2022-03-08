@@ -5,8 +5,7 @@
 #include <vector>
 #include "Prop.h"
 #include "Enemy.h"
-
-#define LOG(x) std::cout << (x) << std::endl;
+#include "Projectile.h"
 
 class Game
 {
@@ -40,12 +39,18 @@ private:
 	void KeepCameraInWorld();
 
 	//Game values
-	Texture2D map;
+	Texture2D map{};
 	float mapScale = 4;
-	float cameraTargetOffset;
+	float cameraTargetOffset{};
 
 	//Objects
 	std::vector<Prop> props;
 	std::vector<Enemy> enemies;
+	std::vector<Projectile>	projectiles;
+
+
+	//Fire logic
+	float coolDown{ 0 };
+	float fireRate{ 0.3f };
 };
 

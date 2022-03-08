@@ -19,6 +19,16 @@ void Projectile::Init(Vector2 position, float rotation)
 	origin = {static_cast<float>(projectileTexture.height) / 2,static_cast<float>(projectileTexture.height) / 2};
 }
 
+void Projectile::checkCollisionWith(Enemy*  enemy)
+{
+	if(CheckCollisionRecs(enemy->getCollisionRec(), getCollisionRec()))
+	{
+		active = false;
+		enemy->setFrozen(true);
+		std::cout << "coliding";
+	}
+}
+
 void Projectile::UpdatePosition(float dt)
 {
 	velocity  = Vector2Add(velocity, direction);
@@ -35,18 +45,6 @@ void Projectile::UpdatePosition(float dt)
 	destRec.y = position.y;
 }
 
-void Projectile::Destroy()
-{
-	UnloadTexture(projectileTexture);
-	active = false;
-}
-
-
-Projectile::~Projectile()
-{
-	Destroy();
-}
-
 void Projectile::Update(float dt)
 {
 	if (lifeTime >= maxLifeTime) {
@@ -59,12 +57,8 @@ void Projectile::Update(float dt)
 	{
 		Draw();
 		UpdatePosition(dt);
-	}else
-	{
-		Destroy();
 	}
 }
-
 
 void Projectile::Draw()
 {

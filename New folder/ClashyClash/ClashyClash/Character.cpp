@@ -23,9 +23,18 @@ void Character::Update(const float deltaTime)
 
 	LookAtMouse(gameCam);
 
-	Fire();
-
 	mousePos = GetMousePosition();
+}
+
+Rectangle Character::getCollisionRec()
+{
+	float modifier = 0.5f;
+	return Rectangle{
+		position.x - width * scale / 2 * modifier,
+		position.y - height * scale / 2 * modifier,
+		width* scale * modifier,
+		height* scale * modifier
+	};
 }
 
 void Character::LookAtMouse(const Camera2D* camera)
@@ -60,33 +69,7 @@ void Character::UndoMovement()
 	position = lastPos;
 }
 
-void Character::Fire()
-{
-	coolDown += dt;
-	
-	//add a projectile to the projectiles vector
-	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && fireRate < coolDown)
-	{
-		Projectile projectile;
 
-		projectile.Init(position, rotation);
-
-		projectiles.push_back(projectile);
-
-		coolDown = 0;
-	}
-
-	//loop trough the projectiles and update them
-	for (int i = projectiles.size() - 1; i >= 0; i--)
-	{
-		projectiles[i].Update(dt);
-
-		if(!projectiles[i].active)
-		{
-			projectiles.erase(projectiles.begin() + i);
-		}
-	}
-}
 
 
 

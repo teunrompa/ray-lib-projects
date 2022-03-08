@@ -1,20 +1,6 @@
-﻿  BaseCharacter.cpp
+﻿  Game.cpp
 C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\BaseCharacter.h(36,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-  Character.cpp
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\BaseCharacter.h(36,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Character.cpp(9,24): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Character.cpp(10,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Enemy.cpp
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\BaseCharacter.h(36,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Enemy.cpp(12,35): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Enemy.cpp(13,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Enemy.cpp(53,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Game.cpp
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\BaseCharacter.h(36,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(5,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(5,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(13,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  main.cpp
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\BaseCharacter.h(36,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-  Generating Code...
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(7,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(7,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(15,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   ClashyClash.vcxproj -> C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\Debug\ClashyClash.exe

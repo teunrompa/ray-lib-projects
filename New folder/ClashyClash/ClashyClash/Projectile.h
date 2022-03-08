@@ -1,13 +1,16 @@
 #pragma once
+#ifndef PROJECTILE_H
+#define PROJECTILE_H
+
 #include "raylib.h"
 #include <iostream>
+
 #include "raymath.h"
+#include "Enemy.h"
 
 class Projectile
 {
 public:
-	Projectile() = default;
-	~Projectile();
 	void Update(float dt);
 	void Init(Vector2 position, float rotation);
 
@@ -15,17 +18,16 @@ public:
 	bool hitObj = false; //TODO: implement collision width objects
 
 	Rectangle getCollisionRec() { return hitBox; }
+	void setActive(const bool active) { this->active = active; }
 
-	void Destroy();
+	void checkCollisionWith(Enemy* enemy);
 
 private:
 
-	float damage = 10;
-	float speed = 900;
-	float lifeTime = 0;
-	float maxLifeTime = 7;
+	float speed{900};
+	float lifeTime {0};
+	float maxLifeTime{7};
 	float rotation{};
-	float coolDown = 0;
 
 	Vector2 position{};
 	Vector2 velocity{1, 1};
@@ -44,3 +46,4 @@ private:
 
 };
 
+#endif

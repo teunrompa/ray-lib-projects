@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include <functional>
+
 void Game::InitGame() 
 {
 	InitWindow(screenSize.x, screenSize.y, "Top down game");
@@ -91,6 +93,7 @@ void Game::UpdateGame()
 		player.UndoMovement();
 	}
 
+
 	//Loop trough props
 	for (auto prop : props)
 	{
@@ -104,20 +107,53 @@ void Game::UpdateGame()
 		DrawRectangleRec(prop.getCollisionRec(), YELLOW);
 	}
 
-	for (int i = enemies.size() - 1; i >= 0; i--)
+	for (auto& enemy : enemies)
 	{
-		enemies[i].setTarget(&player);
-		enemies[i].Update(GetFrameTime());
+		enemy.setTarget(&player);
+		enemy.Update(GetFrameTime());
+	}
 
-		for (auto& projectile : player.getProjectiles())
+	coolDown += GetFrameTime();
+
+	//add a projectile to the projectiles vector
+	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && fireRate < coolDown)
+	{
+		Projectile projectile;
+
+		projectile.Init(player.position, player.getRotation());
+
+		projectiles.push_back(projectile);
+
+		coolDown = 0;
+	}
+
+	//Loop trough the projectiles and update them
+
+	if (!projectiles.empty())
+	{
+		for (int i = projectiles.size() - 1; i >= 0; i--)
 		{
-			if(CheckCollisionRecs(enemies[i].getCollisionRec(), projectile.getCollisionRec()))
+			//Update the active projectile
+			if (projectiles[i].active)
+				projectiles[i].Update(GetFrameTime());
+
+			//Check for collision width enemy
+			if (!enemies.empty() && !projectiles.empty())
 			{
-				enemies[i].setFrozen(true);
-				projectile.Destroy();
+				for (auto& enemy : enemies)
+				{
+					projectiles[i].checkCollisionWith(&enemy);
+					
+				}
+			}
+			//Remove the projectile if not active
+			if (!projectiles[i].active)
+			{
+				projectiles.erase(projectiles.begin() + i);
 			}
 		}
 	}
+
 
 	KeepCameraInWorld();
 
