@@ -6,9 +6,11 @@ void Projectile::Init(Vector2 position, float rotation)
 
 	this->position = position;
 	this->rotation = rotation;
-	this->rotation -= 90;
+	this->rotation -= 90; //Correct angle
 
+	//Rotate vector to match rotation
 	direction = Vector2Rotate(direction, this->rotation);
+
 	hitBox.width = projectileTexture.width;
 	hitBox.height = projectileTexture.height;
 
@@ -22,8 +24,7 @@ void Projectile::UpdatePosition(float dt)
 	velocity  = Vector2Add(velocity, direction);
 	velocity = Vector2Normalize(velocity);
 
-	velocity.x *= speed * dt;
-	velocity.y *= speed * dt;
+	velocity = Vector2Scale(velocity, speed * dt);
 
 	position = Vector2Add(position, velocity);
 
@@ -37,6 +38,13 @@ void Projectile::UpdatePosition(float dt)
 void Projectile::Destroy()
 {
 	UnloadTexture(projectileTexture);
+	active = false;
+}
+
+
+Projectile::~Projectile()
+{
+	Destroy();
 }
 
 void Projectile::Update(float dt)
@@ -60,6 +68,5 @@ void Projectile::Update(float dt)
 
 void Projectile::Draw()
 {
-	DrawRectangleRec(hitBox, RED);
 	DrawTexturePro(projectileTexture, source, destRec, origin, rotation, RAYWHITE);
 }

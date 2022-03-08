@@ -2,18 +2,22 @@
 
 void Game::InitGame() 
 {
-	InitWindow( screenSize.x, screenSize.y, "Top down game");
-	
+	InitWindow(screenSize.x, screenSize.y, "Top down game");
+
 	map = LoadTexture("nature_tileset/OpenWorldMap24x24.png"); //load the map texture
 	worldSize = Vector2{static_cast<float>(map.width) * mapScale, static_cast<float>(map.height) * mapScale}; //make the world size based on the map texture
 	worldBounds = {0,0, worldSize.x, worldSize.y};
 
 	//Init all the objects here...
-	player.Init();
-	player.position = Vector2{screenSize.x / 2, screenSize.y / 2};
-	cameraTargetOffset = player.playerTexture.width;
+	player.Init(camera, Vector2{ screenSize.x / 2, screenSize.y / 2 });
+	cameraTargetOffset = player.texture.width / player.maxAnimationFrames;
 
-	rock.Init(Vector2{200, 600}, LoadTexture("nature_tileset/Rock.png"));
+	//Game props
+	props.emplace_back(Vector2{200, 200}, LoadTexture("nature_tileset/Rock.png"));
+	props.emplace_back(Vector2{200, 500}, LoadTexture("nature_tileset/Bush.png"));
+
+	//Enemies just for testing
+	enemies.emplace_back(Vector2{ 300, 400 }, LoadTexture("sprites/flame_character_sheet.png"), LoadTexture("sprites/flame_character_sheet.png"));
 
 }
 
@@ -36,11 +40,10 @@ void Game::EndDrawingGame()
 
 void Game::DrawMap()
 {
-	Vector2 mapPos{ 0, 0 };
-	DrawTextureEx(map, mapPos, 0, mapScale, WHITE);
+	DrawTextureEx(map, Vector2{ 0, 0 }, 0, mapScale, WHITE);
 }
 
-void Game::CheckIfPlayerIsInWorld()
+void Game::KeepCameraInWorld()
 {
 	if (player.position.x > worldSize.x)
 	{
@@ -64,19 +67,59 @@ void Game::CheckIfPlayerIsInWorld()
 	}
 }
 
+
 //Write your Game Code here...
 void Game::UpdateGame()
 {
+
 	DrawGame();
 
 	ClearGameScreen();
 
 	DrawMap();
 
-	player.UpdatePlayer(camera);
-	rock.Render();
+	gameTime += GetFrameTime();
 
-	CheckIfPlayerIsInWorld();
+	player.Update(GetFrameTime());
+
+	//check if the player is within the map
+	if( player.position.x < 0 ||
+		player.position.y < 0 || 
+		player.position.x + screenSize.x > worldSize.x ||
+		player.position.y + screenSize.y > worldSize.y)
+	{
+		player.UndoMovement();
+	}
+
+	//Loop trough props
+	for (auto prop : props)
+	{
+		prop.Render();
+		//Is player colliding width props?
+		if (CheckCollisionRecs(prop.getCollisionRec(), player.getCollisionRec()))
+		{
+			player.UndoMovement();
+		}
+
+		DrawRectangleRec(prop.getCollisionRec(), YELLOW);
+	}
+
+	for (int i = enemies.size() - 1; i >= 0; i--)
+	{
+		enemies[i].setTarget(&player);
+		enemies[i].Update(GetFrameTime());
+
+		for (auto& projectile : player.getProjectiles())
+		{
+			if(CheckCollisionRecs(enemies[i].getCollisionRec(), projectile.getCollisionRec()))
+			{
+				enemies[i].setFrozen(true);
+				projectile.Destroy();
+			}
+		}
+	}
+
+	KeepCameraInWorld();
 
 	EndDrawingGame();
 }

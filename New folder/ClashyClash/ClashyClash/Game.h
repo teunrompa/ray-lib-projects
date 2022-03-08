@@ -1,11 +1,10 @@
 #pragma once
-#include "Player.h"
+#include "Character.h"
 #include "raylib.h"
 #include <iostream>
 #include <vector>
-
 #include "Prop.h"
-
+#include "Enemy.h"
 
 #define LOG(x) std::cout << (x) << std::endl;
 
@@ -14,7 +13,7 @@ class Game
 public:
 
 	Vector2 screenSize{ 1000, 800 };
-	Vector2 worldSize;
+	Vector2 worldSize{}; //This accounts for scale
 
 	void InitGame();
 	void UpdateGame();
@@ -25,11 +24,11 @@ public:
 
 	Camera2D camera{ cameraOffset, player.position , 0, 1 };
 
-	Player player;
-	Prop rock;
-	Prop props[2];
+	Character player{};
 
-	Rectangle worldBounds;
+	Rectangle worldBounds{};
+
+	float gameTime = GetFrameTime();
 
 private:
 
@@ -38,13 +37,15 @@ private:
 	void ClearGameScreen();
 	void EndDrawingGame();
 	void DrawMap();
-	void CheckIfPlayerIsInWorld();
-
+	void KeepCameraInWorld();
 
 	//Game values
 	Texture2D map;
 	float mapScale = 4;
 	float cameraTargetOffset;
 
+	//Objects
+	std::vector<Prop> props;
+	std::vector<Enemy> enemies;
 };
 

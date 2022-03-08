@@ -4,9 +4,9 @@
 class Prop
 {
 public:
-
+	Prop(Vector2 pos, Texture2D texture);
 	void Render();
-	void Init(Vector2 pos, Texture2D texture);
+	Rectangle getCollisionRec();
 
 private:
 	Texture2D texture{};
