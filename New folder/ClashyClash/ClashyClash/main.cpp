@@ -11,6 +11,7 @@ int main() {
     while (!WindowShouldClose())
     {
         game.UpdateGame();
+        game.EndDrawingGame();
     }
 
     game.GameShouldStop();

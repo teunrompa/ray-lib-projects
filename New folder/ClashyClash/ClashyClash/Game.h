@@ -10,9 +10,6 @@
 #include "WaveHandler.h"
 #include "TextureManager.h"
 #include <string>
-#define RAYGUI_IMPLEMENTATION 
-#include "raygui.h"
-
 
 class Game
 {
@@ -24,6 +21,7 @@ public:
 	void UpdateGame();
 	void GameShouldStop();
 	void ShowMessage(std::string msg, Vector2 pos, float font_size, Color text_color);
+	void EndDrawingGame();
 
 	//Public objects
 	Vector2 cameraOffset{ screenSize.x / 2, screenSize.y / 2 };
@@ -41,12 +39,11 @@ private:
 	//Game rendering methods
 	void DrawGame();
 	void ClearGameScreen();
-	void EndDrawingGame();
 	void DrawMap();
 	void KeepCameraInWorld();
 	void ResetGame();
 
-	bool hasStarded{ false };
+	bool gameHasStarted{ false };
 
 	//Game values
 	Texture2D map{};

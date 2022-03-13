@@ -92,8 +92,3 @@ void Character::ResetValues(const Vector2 pos)
 	
 	setAlive(true);
 }
-
-
-
-
-

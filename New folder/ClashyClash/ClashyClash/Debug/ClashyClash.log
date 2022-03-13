@@ -1,8 +1,19 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (ClashyClash.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Game.cpp
 C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\BaseCharacter.h(37,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.h(14,10): fatal error C1083: Cannot open include file: 'raygui.h': No such file or directory
-  main.cpp
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\BaseCharacter.h(37,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.h(14,10): fatal error C1083: Cannot open include file: 'raygui.h': No such file or directory
-  Generating Code...
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(5,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(5,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(15,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(92,82): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(92,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(93,123): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(93,100): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(94,157): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(94,134): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(117,93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(117,146): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(139,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(250,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(250,34): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(250,27): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+  ClashyClash.vcxproj -> C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\Debug\TopDownShooter.exe

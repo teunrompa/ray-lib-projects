@@ -78,23 +78,38 @@ void Game::ResetGame()
 	//Reset the enemy count
 	std::vector<Enemy> emptyEnemies;
 	enemies = emptyEnemies;
+	score = 0;
 }
 
 //Write your Game Code here...
 void Game::UpdateGame()
 {
-	//strings need to be defined here because the Text needs to be reset each time
-	std::string healthString{ "Health: " };
-	healthString.append(std::to_string(player.getCurrentHealth()), 0, 5);
-
-	std::string scoreString{ "Score: " };
-	scoreString.append(std::to_string(score), 0, 5);
-
 	DrawGame();
 
 	ClearGameScreen();
 
+	if (!gameHasStarted)
+	{
+		DrawText("Press space to start the game", camera.target.x - 300 , camera.target.y , 40, BLACK);
+		DrawText("Controls:\nW A S D = move,\nleft mouse = shoot,\nright mouse = melee", camera.target.x - 300, camera.target.y - 150, 15, GRAY);
+		DrawText("Freeze enemies width your projectile,\nthen destoy them while they are frozen width your mellee attack", camera.target.x - 300, camera.target.y - 50, 15, GRAY);
+
+
+		if(IsKeyPressed(KEY_SPACE))
+		{
+			gameHasStarted = true;
+		}
+		return;
+	}
+
 	DrawMap();
+
+	//strings need to be defined here because the Text needs to be reset each time
+	std::string healthString{"Health: " };
+	healthString.append(std::to_string(player.getCurrentHealth()), 0, 5);
+
+	std::string scoreString{"Score: " };
+	scoreString.append(std::to_string(score), 0, 5);
 
 	gameTime += GetFrameTime();
 
@@ -206,14 +221,15 @@ void Game::UpdateGame()
 	}
 
 	
+	
 
 	if (!player.getAlive())
 	{
 		Vector2 score_text_pos_right{ player.getPos().x - 40, player.getPos().y + 100 };
 		ShowMessage(scoreString, score_text_pos_right, 20, GREEN);
 
-		Vector2 game_over_text_pos{ player.getPos().x - 155, player.getPos().y - 100 };
-		ShowMessage("Game Over! Press space to restart", game_over_text_pos, 20, RED);
+		Vector2 game_over_text_pos{ player.getPos().x - 350, player.getPos().y - 100 };
+		ShowMessage("Game Over! Press space to restart or esc to quit", game_over_text_pos, 30, BLACK);
 
 		if (IsKeyPressed(KEY_SPACE))
 		{
@@ -222,8 +238,6 @@ void Game::UpdateGame()
 	}
 
 	KeepCameraInWorld();
-
-	EndDrawingGame();
 }
 
 void Game::GameShouldStop()
