@@ -13,14 +13,16 @@ public:
 
 	Texture2D texture{};
 	Texture2D textureIdle{};
-	Texture2D textureMove{};
-	virtual Rectangle getCollisionRec();
 
 	virtual void Update(float dt);
 	void unsetMovement();
 	void ResetAnimationData(const Texture2D* new_texture, const int maxFrames, const float updateTime);
+
+	virtual Rectangle getCollisionRec();
 	Vector2 getPos() { return position; }
-	
+	bool getAlive() { return isAlive; }
+	void setAlive(const bool alive) { isAlive = alive; }
+
 	int maxAnimationFrames{ 4 };
 
 	float getRotation() { return rotation; }
@@ -35,6 +37,9 @@ protected:
 	float rotation{ 0 };
 	float updateTime{0.3};
 	float speed{2};
+
+private:
+	bool isAlive{ true };
 };
 
 #endif

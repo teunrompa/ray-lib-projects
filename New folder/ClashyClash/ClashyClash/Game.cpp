@@ -1,6 +1,5 @@
 #include "Game.h"
 
-#include <functional>
 
 void Game::InitGame() 
 {
@@ -19,8 +18,12 @@ void Game::InitGame()
 	props.emplace_back(Vector2{200, 500}, LoadTexture("nature_tileset/Bush.png"));
 
 	//Enemies just for testing
-	enemies.emplace_back(Vector2{ 300, 400 }, LoadTexture("sprites/flame_character_sheet.png"), LoadTexture("sprites/flame_character_sheet.png"));
+	enemies.emplace_back(Vector2{ 300, 400 }, LoadTexture("sprites/flame_character_sheet.png"));
+	attack.Init(player.getPos(), 0.5f, 20, LoadTexture("sprites/swing_animation.png"));
 
+	//Wave handler & enemy template
+	WaveHandler wave_handler{3,3, &enemies};
+	waveHandler = wave_handler;
 }
 
 void Game::DrawGame()
@@ -84,6 +87,8 @@ void Game::UpdateGame()
 
 	player.Update(GetFrameTime());
 
+	waveHandler.Update(GetFrameTime(), Vector2{ static_cast<float>(GetRandomValue(0, screenSize.x)), static_cast<float>(GetRandomValue(0, screenSize.y)) });
+
 	//check if the player is within the map
 	if( player.position.x < 0 ||
 		player.position.y < 0 || 
@@ -103,14 +108,17 @@ void Game::UpdateGame()
 		{
 			player.UndoMovement();
 		}
-
-		DrawRectangleRec(prop.getCollisionRec(), YELLOW);
 	}
 
-	for (auto& enemy : enemies)
+	for (int i = 0; i < enemies.size(); ++i)
 	{
-		enemy.setTarget(&player);
-		enemy.Update(GetFrameTime());
+		enemies[i].setTarget(&player);
+		enemies[i].Update(GetFrameTime());
+
+		if(!enemies[i].getAlive())
+		{
+			enemies.erase(enemies.begin() + i);
+		}
 	}
 
 	coolDown += GetFrameTime();
@@ -120,7 +128,7 @@ void Game::UpdateGame()
 	{
 		Projectile projectile;
 
-		projectile.Init(player.position, player.getRotation());
+		projectile.Init(player.getPos(), player.getRotation());
 
 		projectiles.push_back(projectile);
 
@@ -128,7 +136,6 @@ void Game::UpdateGame()
 	}
 
 	//Loop trough the projectiles and update them
-
 	if (!projectiles.empty())
 	{
 		for (int i = projectiles.size() - 1; i >= 0; i--)
@@ -143,9 +150,9 @@ void Game::UpdateGame()
 				for (auto& enemy : enemies)
 				{
 					projectiles[i].checkCollisionWith(&enemy);
-					
 				}
 			}
+
 			//Remove the projectile if not active
 			if (!projectiles[i].active)
 			{
@@ -153,6 +160,19 @@ void Game::UpdateGame()
 			}
 		}
 	}
+
+	if(!enemies.empty())
+	{
+		for (auto& enemy : enemies)
+		{
+			if (enemy.getFrozen() && attack.getIsAttacking() && CheckCollisionCircleRec(attack.getPos(), attack.getRadius(), enemy.getCollisionRec()))
+			{
+				enemy.setAlive(false);
+			}
+		}
+	}
+
+	attack.Update(player.getPos(), GetFrameTime(), player.getRotation());
 
 
 	KeepCameraInWorld();

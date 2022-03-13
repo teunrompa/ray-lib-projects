@@ -6,11 +6,12 @@
 #include "Prop.h"
 #include "Enemy.h"
 #include "Projectile.h"
+#include "Attack.h"
+#include "WaveHandler.h"
 
 class Game
 {
 public:
-
 	Vector2 screenSize{ 1000, 800 };
 	Vector2 worldSize{}; //This accounts for scale
 
@@ -48,6 +49,8 @@ private:
 	std::vector<Enemy> enemies;
 	std::vector<Projectile>	projectiles;
 
+	Attack attack{};
+	WaveHandler waveHandler{1,2, &enemies};
 
 	//Fire logic
 	float coolDown{ 0 };

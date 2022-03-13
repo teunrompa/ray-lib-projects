@@ -19,13 +19,12 @@ void Projectile::Init(Vector2 position, float rotation)
 	origin = {static_cast<float>(projectileTexture.height) / 2,static_cast<float>(projectileTexture.height) / 2};
 }
 
-void Projectile::checkCollisionWith(Enemy*  enemy)
+void Projectile::checkCollisionWith(Enemy* enemy)
 {
 	if(CheckCollisionRecs(enemy->getCollisionRec(), getCollisionRec()))
 	{
 		active = false;
 		enemy->setFrozen(true);
-		std::cout << "coliding";
 	}
 }
 
@@ -45,7 +44,7 @@ void Projectile::UpdatePosition(float dt)
 	destRec.y = position.y;
 }
 
-void Projectile::Update(float dt)
+void Projectile::Update(const float dt)
 {
 	if (lifeTime >= maxLifeTime) {
 		active = false;
@@ -57,6 +56,9 @@ void Projectile::Update(float dt)
 	{
 		Draw();
 		UpdatePosition(dt);
+	}else
+	{
+		UnloadTexture(projectileTexture);
 	}
 }
 

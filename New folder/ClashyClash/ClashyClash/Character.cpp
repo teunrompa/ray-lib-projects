@@ -1,6 +1,6 @@
 #include "Character.h"
 
-void Character::Init(Camera2D &camera, Vector2 position)
+void Character::Init(Camera2D& camera, Vector2 position)
 {
 	texture = LoadTexture("sprites/player_topdown_sheett.png");
 	gameCam = &camera;
@@ -15,6 +15,8 @@ void Character::Init(Camera2D &camera, Vector2 position)
 
 void Character::Update(const float deltaTime)
 {
+	if (!getAlive()) return;
+
 	BaseCharacter::Update(deltaTime);
 
 	dt = deltaTime;
@@ -36,6 +38,8 @@ Rectangle Character::getCollisionRec()
 		height* scale * modifier
 	};
 }
+
+
 
 void Character::LookAtMouse(const Camera2D* camera)
 {

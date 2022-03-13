@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Vector2 pos, Texture2D texture_idle, Texture2D texture_move)
+Enemy::Enemy(Vector2 pos, Texture2D texture_idle)
 {
 	maxAnimationFrames = 4;
 
@@ -8,7 +8,6 @@ Enemy::Enemy(Vector2 pos, Texture2D texture_idle, Texture2D texture_move)
 
 	this->position = pos;
 	this->textureIdle = texture_idle;
-	this->textureMove = texture_move;
 	this->width = texture_idle.width / maxAnimationFrames;
 	this->height = texture_idle.height;
 	speed = 300;
@@ -16,6 +15,8 @@ Enemy::Enemy(Vector2 pos, Texture2D texture_idle, Texture2D texture_move)
 
 void Enemy::Update(const float dt)
 {
+	if(!getAlive()) return;
+
 	if(!frozen)
 	{
 		texture = textureIdle;
@@ -33,7 +34,6 @@ void Enemy::Update(const float dt)
 	{
 		Freeze();
 	}
-	DrawRectangleRec(getCollisionRec(), RED);
 	BaseCharacter::Update(dt);
 }
 

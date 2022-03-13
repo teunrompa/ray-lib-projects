@@ -1,6 +1,4 @@
-﻿  Game.cpp
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\BaseCharacter.h(36,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(7,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(7,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(15,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  ClashyClash.vcxproj -> C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\Debug\ClashyClash.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (ClashyClash.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Attack.cpp
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Attack.cpp(13,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  ClashyClash.vcxproj -> C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\Debug\TopDownShooter.exe

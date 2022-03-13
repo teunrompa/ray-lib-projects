@@ -8,12 +8,12 @@
 class Enemy : public BaseCharacter
 {
 public:
-	Enemy(Vector2 pos, Texture2D texture_idle, Texture2D texture_move);
+	Enemy(Vector2 pos, Texture2D texture_idle);
 
 	void Update(float dt) override;
 
 	void setTarget(Character* target);
-	void setFrozen(const bool frozen);
+	void setFrozen(bool frozen);
 	bool getFrozen() { return frozen; }
 	Rectangle getCollisionRec() override;
 

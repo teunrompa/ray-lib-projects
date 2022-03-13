@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "BaseCharacter.h"
+#include "Attack.h"
 
 class Character : public BaseCharacter
 {
@@ -23,8 +24,10 @@ public:
 
 	void Move();
 	void UndoMovement(); // reset the player to the last position he was at
+
 	Vector2 lastPos{};
 	Rectangle getCollisionRec() override;
+
 private:
 
 
