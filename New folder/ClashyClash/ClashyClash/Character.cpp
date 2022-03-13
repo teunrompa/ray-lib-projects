@@ -12,7 +12,7 @@ void Character::Init(Camera2D& camera, Vector2 position, Texture2D texture)
 }
 
 
-void Character::Update(const float deltaTime, Color color)
+void Character::Update(const float deltaTime)
 {
 
 	damageCooldownCount += deltaTime;
@@ -24,7 +24,7 @@ void Character::Update(const float deltaTime, Color color)
 
 	if (!getAlive()) return;
 
-	BaseCharacter::Update(deltaTime, RED);
+	BaseCharacter::Update(deltaTime);
 
 	dt = deltaTime;
 

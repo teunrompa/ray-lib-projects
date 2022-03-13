@@ -14,7 +14,7 @@ Enemy::Enemy(Vector2 pos, Texture2D texture_idle, Texture2D texture_frozen)
 	speed = 300;
 }
 
-void Enemy::Update(const float dt, Color color)
+void Enemy::Update(const float dt)
 {
 	if(!getAlive()) return;
 
@@ -35,7 +35,7 @@ void Enemy::Update(const float dt, Color color)
 	{
 		Freeze();
 	}
-	BaseCharacter::Update(dt, WHITE);
+	BaseCharacter::Update(dt);
 }
 
 void Enemy::setTarget(Character* target)
@@ -65,12 +65,13 @@ void Enemy::Freeze()
 
 Rectangle Enemy::getCollisionRec()
 {
-	float modifier = 0.7f;
+	float modifier_x = 0.6f;
+	float modifier_y = 0.8f;
 	return Rectangle{
-		position.x - width * scale / 2 * modifier,
-		position.y - height * scale / 2 ,
-		width * scale * modifier ,
-		height * scale
+		position.x - width * scale / 2 * modifier_x,
+		position.y - height * scale / 2  * modifier_y,
+		width * scale * modifier_x ,
+		height * scale * modifier_y
 	};
 }
 

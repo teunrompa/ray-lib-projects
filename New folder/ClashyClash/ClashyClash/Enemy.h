@@ -10,7 +10,7 @@ class Enemy : public BaseCharacter
 public:
 	Enemy(Vector2 pos, Texture2D texture_idle, Texture2D texture_frozen);
 
-	void Update(float dt, Color color) override;
+	void Update(float dt) override;
 
 	void setTarget(Character* target);
 	void setFrozen(bool frozen);

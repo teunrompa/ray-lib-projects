@@ -4,11 +4,15 @@ C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyCla
 C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(7,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(7,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(17,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(94,93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(94,146): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(117,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(195,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(195,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(201,115): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(201,71): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(91,93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(91,146): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(114,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(229,38): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(229,34): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\Game.cpp(229,27): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+  main.cpp
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\BaseCharacter.h(37,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  WaveHandler.cpp
+C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\ClashyClash\BaseCharacter.h(37,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
   ClashyClash.vcxproj -> C:\Users\teunr\source\repos\RaylibProjects\ray-lib-projects\New folder\ClashyClash\Debug\TopDownShooter.exe

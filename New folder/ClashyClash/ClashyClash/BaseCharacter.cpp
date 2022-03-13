@@ -1,6 +1,6 @@
 #include "BaseCharacter.h"
 
-void BaseCharacter::Update(float dt, Color color)
+void BaseCharacter::Update(float dt)
 {
 	worldPosLastFrame = position;
 

@@ -13,7 +13,7 @@ public:
 	Texture2D texture{};
 	Texture2D textureIdle{};
 
-	virtual void Update(float dt, Color color);
+	virtual void Update(float dt);
 	void unsetMovement();
 	void ResetAnimationData(const Texture2D* new_texture,  int maxFrames, const float updateTime);
 
@@ -36,6 +36,9 @@ protected:
 	float rotation{ 0 };
 	float updateTime{0.3};
 	float speed{500};
+
+	Color color{ 255, 255, 255, 255 };
+	Color damagedColor{ 230, 41, 55, 255 };
 
 private:
 	bool isAlive{ true };

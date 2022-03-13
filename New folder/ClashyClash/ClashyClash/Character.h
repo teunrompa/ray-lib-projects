@@ -15,7 +15,7 @@ public:
 	Vector2 mousePos = GetMousePosition();
 
 	void Init(Camera2D& camera, Vector2 position, Texture2D texture);
-	void Update(float deltaTime, Color color) override; //updates the player logic
+	void Update(float deltaTime) override; //updates the player logic
 
 	//Check if the player has reached the edge of the map
 	bool isPlayerInMap = true;
@@ -43,6 +43,8 @@ private:
 	float dt{ 0 };
 
 	Camera2D* gameCam;
+
+	
 };
 
 #endif

@@ -21,6 +21,7 @@ public:
 	void InitGame();
 	void UpdateGame();
 	void GameShouldStop();
+	void ShowMessage(std::string msg, Vector2 pos, float font_size, Color text_color);
 
 	//Public objects
 	Vector2 cameraOffset{ screenSize.x / 2, screenSize.y / 2 };
@@ -62,5 +63,6 @@ private:
 
 	float score{ 0 };
 
+	
 };
 

@@ -73,7 +73,6 @@ void Game::KeepCameraInWorld()
 	}
 }
 
-
 //Write your Game Code here...
 void Game::UpdateGame()
 {
@@ -86,11 +85,8 @@ void Game::UpdateGame()
 
 	gameTime += GetFrameTime();
 
-	player.Update(GetFrameTime(), RED);
+	player.Update(GetFrameTime());
 
-	std::string healthString{ "Health: " };
-
-	
 	waveHandler.Update(GetFrameTime(), Vector2{ static_cast<float>(GetRandomValue(0, screenSize.x)), static_cast<float>(GetRandomValue(0, screenSize.y)) });
 
 	//check if the player is within the map
@@ -117,7 +113,7 @@ void Game::UpdateGame()
 	for (int i = 0; i < enemies.size(); ++i)
 	{
 		enemies[i].setTarget(&player);
-		enemies[i].Update(GetFrameTime(), WHITE);
+		enemies[i].Update(GetFrameTime());
 
 		if(!enemies[i].getAlive())
 		{
@@ -165,6 +161,14 @@ void Game::UpdateGame()
 		}
 	}
 
+
+	//strings need to be defined here because the Text needs to be reset each time
+	std::string healthString{ "Health: " };
+	healthString.append(std::to_string(player.getCurrentHealth()), 0, 5);
+
+	std::string scoreString{ "Score: " };
+	scoreString.append(std::to_string(score), 0, 5);
+
 	if(!enemies.empty())
 	{
 		for (auto& enemy : enemies)
@@ -192,13 +196,20 @@ void Game::UpdateGame()
 
 	if (!player.getAlive())
 	{
-		DrawText("Game over", player.getPos().x - 100, player.getPos().y - 64, 40, RED);
+		//DrawText("Game over", player.getPos().x - 100, player.getPos().y - 64, 40, RED);
+		ShowMessage("Game over", player.getPos(), 40, RED);
+
+		Vector2 score_text_pos_right{ player.getPos().x + screenSize.x / 2 - 100, player.getPos().y - screenSize.y + 200 };
+		ShowMessage(scoreString, score_text_pos_right, 20, GREEN);
 	}
 	else
 	{
 		//Draw health and score
-		healthString.append(std::to_string(player.getCurrentHealth()), 0, 5);
-		DrawText(healthString.c_str(), player.getPos().x - screenSize.x / 2 + 100, player.getPos().y - screenSize.y / 2 + 100, 20, WHITE);
+		Vector2 health_text_pos{player.getPos().x - screenSize.x / 2 + 50, player.getPos().y - screenSize.y / 2 + 100};
+		ShowMessage(healthString, health_text_pos, 20, WHITE);
+
+		Vector2 score_text_pos { player.getPos().x + screenSize.x / 2 - 100, player.getPos().y - screenSize.y / 2 + 100};
+		ShowMessage(scoreString, score_text_pos, 20, GREEN);
 	}
 
 	KeepCameraInWorld();
@@ -210,4 +221,9 @@ void Game::GameShouldStop()
 {
 	UnloadTexture(map);
 	CloseWindow();
+}
+
+void Game::ShowMessage(const std::string msg, const Vector2 pos, const float font_size, const Color text_color)
+{
+	DrawText(msg.c_str(), pos.x, pos.y, font_size, text_color);
 }
