@@ -1,28 +1,29 @@
 #include "Game.h"
 
 
+
 void Game::InitGame() 
 {
 	InitWindow(screenSize.x, screenSize.y, "Top down game");
+
+	textureManager.init();
 
 	map = LoadTexture("nature_tileset/OpenWorldMap24x24.png"); //load the map texture
 	worldSize = Vector2{static_cast<float>(map.width) * mapScale, static_cast<float>(map.height) * mapScale}; //make the world size based on the map texture
 	worldBounds = {0,0, worldSize.x, worldSize.y};
 
 	//Init all the objects here...
-	player.Init(camera, Vector2{ screenSize.x / 2, screenSize.y / 2 });
+	player.Init(camera, Vector2{ screenSize.x / 2, screenSize.y / 2 }, textureManager.getPlayer());
 	cameraTargetOffset = player.texture.width / player.maxAnimationFrames;
 
 	//Game props
 	props.emplace_back(Vector2{200, 200}, LoadTexture("nature_tileset/Rock.png"));
 	props.emplace_back(Vector2{200, 500}, LoadTexture("nature_tileset/Bush.png"));
 
-	//Enemies just for testing
-	enemies.emplace_back(Vector2{ 300, 400 }, LoadTexture("sprites/flame_character_sheet.png"));
-	attack.Init(player.getPos(), 0.5f, 20, LoadTexture("sprites/swing_animation.png"));
+	attack.Init(player.getPos(), 0.5f, 45, LoadTexture("sprites/swing_animation.png"));
 
 	//Wave handler & enemy template
-	WaveHandler wave_handler{3,3, &enemies};
+	WaveHandler wave_handler{3,3, &enemies, textureManager.getTextureEnemy(), textureManager.getEnemyFrozen()};
 	waveHandler = wave_handler;
 }
 
@@ -85,8 +86,11 @@ void Game::UpdateGame()
 
 	gameTime += GetFrameTime();
 
-	player.Update(GetFrameTime());
+	player.Update(GetFrameTime(), RED);
 
+	std::string healthString{ "Health: " };
+
+	
 	waveHandler.Update(GetFrameTime(), Vector2{ static_cast<float>(GetRandomValue(0, screenSize.x)), static_cast<float>(GetRandomValue(0, screenSize.y)) });
 
 	//check if the player is within the map
@@ -113,7 +117,7 @@ void Game::UpdateGame()
 	for (int i = 0; i < enemies.size(); ++i)
 	{
 		enemies[i].setTarget(&player);
-		enemies[i].Update(GetFrameTime());
+		enemies[i].Update(GetFrameTime(), WHITE);
 
 		if(!enemies[i].getAlive())
 		{
@@ -124,11 +128,11 @@ void Game::UpdateGame()
 	coolDown += GetFrameTime();
 
 	//add a projectile to the projectiles vector
-	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && fireRate < coolDown)
+	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && fireRate < coolDown && player.getAlive())
 	{
 		Projectile projectile;
 
-		projectile.Init(player.getPos(), player.getRotation());
+		projectile.Init(player.getPos(), player.getRotation(), textureManager.getProjectile());
 
 		projectiles.push_back(projectile);
 
@@ -165,15 +169,37 @@ void Game::UpdateGame()
 	{
 		for (auto& enemy : enemies)
 		{
+			//Enemy dies
 			if (enemy.getFrozen() && attack.getIsAttacking() && CheckCollisionCircleRec(attack.getPos(), attack.getRadius(), enemy.getCollisionRec()))
 			{
 				enemy.setAlive(false);
+				score += 10;
+			}
+			//Check collision between enemy and player
+			if(!enemy.getFrozen() && CheckCollisionRecs(enemy.getCollisionRec(), player.getCollisionRec()))
+			{
+				if(player.getDamageCooldown() > player.getDamageCooldownMax())
+				{
+					player.TakeDamage(25);
+					healthString.append(std::to_string(player.getCurrentHealth()));
+				}
 			}
 		}
 	}
 
-	attack.Update(player.getPos(), GetFrameTime(), player.getRotation());
+	if(player.getAlive())
+		attack.Update(player.getPos(), GetFrameTime(), player.getRotation());
 
+	if (!player.getAlive())
+	{
+		DrawText("Game over", player.getPos().x - 100, player.getPos().y - 64, 40, RED);
+	}
+	else
+	{
+		//Draw health and score
+		healthString.append(std::to_string(player.getCurrentHealth()), 0, 5);
+		DrawText(healthString.c_str(), player.getPos().x - screenSize.x / 2 + 100, player.getPos().y - screenSize.y / 2 + 100, 20, WHITE);
+	}
 
 	KeepCameraInWorld();
 

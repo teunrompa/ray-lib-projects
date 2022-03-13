@@ -1,10 +1,11 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Vector2 pos, Texture2D texture_idle)
+Enemy::Enemy(Vector2 pos, Texture2D texture_idle, Texture2D texture_frozen)
 {
 	maxAnimationFrames = 4;
 
 	texture = texture_idle;
+	this->enemyFrozen = texture_frozen;
 
 	this->position = pos;
 	this->textureIdle = texture_idle;
@@ -13,7 +14,7 @@ Enemy::Enemy(Vector2 pos, Texture2D texture_idle)
 	speed = 300;
 }
 
-void Enemy::Update(const float dt)
+void Enemy::Update(const float dt, Color color)
 {
 	if(!getAlive()) return;
 
@@ -34,7 +35,7 @@ void Enemy::Update(const float dt)
 	{
 		Freeze();
 	}
-	BaseCharacter::Update(dt);
+	BaseCharacter::Update(dt, WHITE);
 }
 
 void Enemy::setTarget(Character* target)

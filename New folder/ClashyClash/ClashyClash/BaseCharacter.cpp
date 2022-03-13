@@ -1,9 +1,6 @@
 #include "BaseCharacter.h"
 
-BaseCharacter::BaseCharacter()
-= default;
-
-void BaseCharacter::Update(float dt)
+void BaseCharacter::Update(float dt, Color color)
 {
 	worldPosLastFrame = position;
 
@@ -20,7 +17,7 @@ void BaseCharacter::Update(float dt)
 	Rectangle source{ currentAnimationFrame * width, 0.f, width, height };
 	Rectangle dest{ position.x, position.y, scale * width, scale * height };
 	Vector2 origin{ width  / 2 * scale,  height / 2 * scale};
-	DrawTexturePro(texture, source, dest, origin, rotation, WHITE);
+	DrawTexturePro(texture, source, dest, origin, rotation, color);
 }
 
 void BaseCharacter::unsetMovement()
@@ -32,9 +29,11 @@ void BaseCharacter::ResetAnimationData(const Texture2D* new_texture, const int m
 {
 	currentAnimationFrame = 0;
 	maxAnimationFrames = maxFrames;
+
 	this->updateTime = updateTime;
-	runningTime = 0;
 	this->width = new_texture->width / maxAnimationFrames;
+
+	runningTime = 0;
 	texture = *new_texture;
 }
 

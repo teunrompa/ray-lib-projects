@@ -1,11 +1,12 @@
 #include "WaveHandler.h"
 
-
-WaveHandler::WaveHandler(const int enemyCount, const float timeToNextSpawn, std::vector<Enemy>* enemies)
+WaveHandler::WaveHandler(const int enemyCount, const float timeToNextSpawn, std::vector<Enemy>* enemies, const Texture2D enemyTexture, Texture2D enemy_frozen)
 {
 	this->enemyCount = enemyCount;
 	this->timeToNextSpawn = timeToNextSpawn;
 	this->enemies = enemies;
+	this->enemyTexture = enemyTexture;
+	this->enemyFrozen = enemy_frozen;
 }
 
 void WaveHandler::Update(const float dt, Vector2 spawnPos)
@@ -18,7 +19,7 @@ void WaveHandler::Update(const float dt, Vector2 spawnPos)
 	{
 		for (int i = 0; i < enemyCount; ++i)
 		{
-			Enemy enemy{ spawnPos, LoadTexture("sprites/flame_character_sheet.png") };
+			Enemy enemy{ spawnPos, enemyTexture, enemyFrozen};
 			SpawnEnemy(enemy);
 			waveTime = 0;
 		}

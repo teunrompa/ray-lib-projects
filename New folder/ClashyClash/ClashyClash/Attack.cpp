@@ -40,17 +40,11 @@ void Attack::Update(Vector2 attackPos, const float dt, const float rotation)
  */
 void Attack::DoAttack(Vector2 pos, const float rotation)
 {
-	//DrawCircleV(position, radius, RED);
-
 	Rectangle source = {currentAnimationFrame * width, 0, width, height };
 	Rectangle dest = { pos.x , pos.y , width * scale, height * scale};
-	Vector2 origin = {width / 2, height };
+	Vector2 origin = {width - 10, height };
 
 	DrawTexturePro(texture, source, dest, origin, rotation, WHITE);
-
-	Vector2 hitboxPos = { dest.x, dest.y };
-
-	DrawCircleV(hitboxPos, radius, RED);
 
 	attacking = true;
 

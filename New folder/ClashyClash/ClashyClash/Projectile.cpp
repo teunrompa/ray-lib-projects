@@ -1,8 +1,8 @@
 #include "Projectile.h"
 
-void Projectile::Init(Vector2 position, float rotation)
+void Projectile::Init(const Vector2 position, const float rotation, const Texture2D texture)
 {
-	projectileTexture = LoadTexture("sprites/snow_ball.png");
+	projectileTexture = texture;
 
 	this->position = position;
 	this->rotation = rotation;
@@ -56,9 +56,6 @@ void Projectile::Update(const float dt)
 	{
 		Draw();
 		UpdatePosition(dt);
-	}else
-	{
-		UnloadTexture(projectileTexture);
 	}
 }
 

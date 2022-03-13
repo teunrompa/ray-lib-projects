@@ -8,9 +8,9 @@
 class Enemy : public BaseCharacter
 {
 public:
-	Enemy(Vector2 pos, Texture2D texture_idle);
+	Enemy(Vector2 pos, Texture2D texture_idle, Texture2D texture_frozen);
 
-	void Update(float dt) override;
+	void Update(float dt, Color color) override;
 
 	void setTarget(Character* target);
 	void setFrozen(bool frozen);
@@ -25,7 +25,7 @@ private:
 
 	Character* target{};
 	Vector2 velocity{};
-	Texture2D enemyFrozen{ LoadTexture("sprites/enemy_frozen_sheet.png")};
+	Texture2D enemyFrozen{};
 };
 
 #endif

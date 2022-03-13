@@ -6,7 +6,6 @@
 class BaseCharacter
 {
 public:
-	BaseCharacter();
 
 	Vector2 position{0,0};
 	Vector2 worldPosLastFrame{};
@@ -14,9 +13,9 @@ public:
 	Texture2D texture{};
 	Texture2D textureIdle{};
 
-	virtual void Update(float dt);
+	virtual void Update(float dt, Color color);
 	void unsetMovement();
-	void ResetAnimationData(const Texture2D* new_texture, const int maxFrames, const float updateTime);
+	void ResetAnimationData(const Texture2D* new_texture,  int maxFrames, const float updateTime);
 
 	virtual Rectangle getCollisionRec();
 	Vector2 getPos() { return position; }
@@ -36,7 +35,7 @@ protected:
 	float runningTime{0};
 	float rotation{ 0 };
 	float updateTime{0.3};
-	float speed{2};
+	float speed{500};
 
 private:
 	bool isAlive{ true };

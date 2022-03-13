@@ -12,7 +12,7 @@ class Projectile
 {
 public:
 	void Update(float dt);
-	void Init(Vector2 position, float rotation);
+	void Init(Vector2 position, float rotation, Texture2D texture);
 
 	bool active = true;
 	bool hitObj = false; //TODO: implement collision width objects

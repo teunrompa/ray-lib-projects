@@ -8,6 +8,9 @@
 #include "Projectile.h"
 #include "Attack.h"
 #include "WaveHandler.h"
+#include "TextureManager.h"
+#include <string>
+
 
 class Game
 {
@@ -50,10 +53,14 @@ private:
 	std::vector<Projectile>	projectiles;
 
 	Attack attack{};
-	WaveHandler waveHandler{1,2, &enemies};
+	TextureManager textureManager;
+	WaveHandler waveHandler{1,2, &enemies, textureManager.getTextureEnemy(), textureManager.getEnemyFrozen()};
 
 	//Fire logic
 	float coolDown{ 0 };
 	float fireRate{ 0.3f };
+
+	float score{ 0 };
+
 };
 

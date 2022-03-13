@@ -1,23 +1,30 @@
 #include "Character.h"
 
-void Character::Init(Camera2D& camera, Vector2 position)
+void Character::Init(Camera2D& camera, Vector2 position, Texture2D texture)
 {
-	texture = LoadTexture("sprites/player_topdown_sheett.png");
 	gameCam = &camera;
+
+	this->texture = texture;
 	this->position = position;
 
 	width = texture.width / maxAnimationFrames;
 	height = texture.height;
-
-	speed = 500;
 }
 
 
-void Character::Update(const float deltaTime)
+void Character::Update(const float deltaTime, Color color)
 {
+
+	damageCooldownCount += deltaTime;
+
+	if(currentHealth <= 0)
+	{
+		setAlive(false);
+	}
+
 	if (!getAlive()) return;
 
-	BaseCharacter::Update(deltaTime);
+	BaseCharacter::Update(deltaTime, RED);
 
 	dt = deltaTime;
 
@@ -71,6 +78,12 @@ void Character::Move()
 void Character::UndoMovement()
 {
 	position = lastPos;
+}
+
+void Character::TakeDamage(const float damage)
+{
+	currentHealth -= damage;
+	damageCooldownCount = 0;
 }
 
 
