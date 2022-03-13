@@ -6,7 +6,7 @@ void Game::InitGame()
 
 	textureManager.init();
 	
-	map = LoadTexture("nature_tileset/OpenWorldMap24x24.png"); //load the map texture
+	map = LoadTexture("sprites/snowmap.png"); //load the map texture
 	worldSize = Vector2{static_cast<float>(map.width) * mapScale, static_cast<float>(map.height) * mapScale}; //make the world size based on the map texture
 	worldBounds = {0,0, worldSize.x, worldSize.y};
 
@@ -90,12 +90,12 @@ void Game::UpdateGame()
 
 	if (!gameHasStarted)
 	{
-		DrawText("Press space to start the game", camera.target.x - 300 , camera.target.y , 40, BLACK);
+		DrawText("Press space to start the game", camera.target.x - 300, camera.target.y, 40, BLACK);
 		DrawText("Controls:\nW A S D = move,\nleft mouse = shoot,\nright mouse = melee", camera.target.x - 300, camera.target.y - 150, 15, GRAY);
 		DrawText("Freeze enemies width your projectile,\nthen destoy them while they are frozen width your mellee attack", camera.target.x - 300, camera.target.y - 50, 15, GRAY);
 
 
-		if(IsKeyPressed(KEY_SPACE))
+		if (IsKeyPressed(KEY_SPACE))
 		{
 			gameHasStarted = true;
 		}
@@ -105,23 +105,48 @@ void Game::UpdateGame()
 	DrawMap();
 
 	//strings need to be defined here because the Text needs to be reset each time
-	std::string healthString{"Health: " };
+	std::string healthString{ "Health: " };
 	healthString.append(std::to_string(player.getCurrentHealth()), 0, 5);
 
-	std::string scoreString{"Score: " };
+	std::string scoreString{ "Score: " };
 	scoreString.append(std::to_string(score), 0, 5);
 
 	gameTime += GetFrameTime();
 
 	player.Update(GetFrameTime());
 
-	waveHandler.Update(GetFrameTime(), Vector2{ static_cast<float>(GetRandomValue(0, screenSize.x)), static_cast<float>(GetRandomValue(0, screenSize.y)) });
+	//Generate random number for deciding where the enemy is going to spawn
+	int randomVal = GetRandomValue(0, 3);
+	Vector2 spawnPosOutside;
+	switch (randomVal)
+	{
+		case 0:
+			//Spawn on random pos on the top of the world on the x axis
+			spawnPosOutside = { static_cast<float>(GetRandomValue(0, worldSize.x)), 0 };
+			break;
+		case 1:
+			//spawn on random pos on the left side of the world y axis
+			spawnPosOutside = { 0, static_cast<float>(GetRandomValue(0, worldSize.y)) };
+			break;
+		case 2:
+			//Spawn on random pos on the bottom of the world x axis
+			spawnPosOutside = { static_cast<float>(GetRandomValue(0, worldSize.x)) , worldSize.y};
+			break;
+		case 3:
+			//Spawn on random pos on the right side of the world on the y axis
+			spawnPosOutside = {  worldSize.x, static_cast<float>(GetRandomValue(0, worldSize.y)) };
+			break;
+		default:
+			spawnPosOutside = { static_cast<float>(GetRandomValue(0, worldSize.x)), 0 };
+	}
+
+	waveHandler.Update(GetFrameTime(), spawnPosOutside);
 
 	//check if the player is within the map
-	if( player.position.x < 0 ||
-		player.position.y < 0 || 
-		player.position.x + screenSize.x > worldSize.x ||
-		player.position.y + screenSize.y > worldSize.y)
+	if( player.position.x < screenSize.x / 2||
+		player.position.y < screenSize.y / 2 || 
+		player.position.x + screenSize.x / 2 > worldSize.x - 50||
+		player.position.y + screenSize.y / 2 > worldSize.y - 50)
 	{
 		player.UndoMovement();
 	}
@@ -214,19 +239,16 @@ void Game::UpdateGame()
 		attack.Update(player.getPos(), GetFrameTime(), player.getRotation());
 		//Draw health and score
 		Vector2 health_text_pos{ player.getPos().x - screenSize.x / 2 + 50, player.getPos().y - screenSize.y / 2 + 100 };
-		ShowMessage(healthString, health_text_pos, 20, WHITE);
+		ShowMessage(healthString, health_text_pos, 20, BLACK);
 
 		Vector2 score_text_pos{ player.getPos().x + screenSize.x / 2 - 100, player.getPos().y - screenSize.y / 2 + 100 };
-		ShowMessage(scoreString, score_text_pos, 20, GREEN);
+		ShowMessage(scoreString, score_text_pos, 20, BLACK);
 	}
-
-	
-	
 
 	if (!player.getAlive())
 	{
 		Vector2 score_text_pos_right{ player.getPos().x - 40, player.getPos().y + 100 };
-		ShowMessage(scoreString, score_text_pos_right, 20, GREEN);
+		ShowMessage(scoreString, score_text_pos_right, 20, BLACK);
 
 		Vector2 game_over_text_pos{ player.getPos().x - 350, player.getPos().y - 100 };
 		ShowMessage("Game Over! Press space to restart or esc to quit", game_over_text_pos, 30, BLACK);

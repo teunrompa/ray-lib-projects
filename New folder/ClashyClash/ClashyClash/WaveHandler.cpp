@@ -11,8 +11,6 @@ WaveHandler::WaveHandler(const int enemyCount, const float timeToNextSpawn, std:
 
 void WaveHandler::Update(const float dt, Vector2 spawnPos)
 {
-	//Todo: keep track off spawned enemies and check if new enemy's need to be spawned
-
 	waveTime += dt;
 
 	if(waveTime > timeToNextSpawn)

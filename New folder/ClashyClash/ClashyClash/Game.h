@@ -47,7 +47,7 @@ private:
 
 	//Game values
 	Texture2D map{};
-	float mapScale = 4;
+	float mapScale = 6;
 	float cameraTargetOffset{};
 
 	//Objects
