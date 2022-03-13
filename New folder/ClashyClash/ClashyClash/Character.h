@@ -24,16 +24,18 @@ public:
 	void Move();
 	void UndoMovement(); // reset the player to the last position he was at
 	void TakeDamage(const float damage);
+	void ResetValues(Vector2 pos);
 
 	float getDamageCooldown() { return damageCooldownCount; }
 	float getDamageCooldownMax() { return damageCooldownMax; }
 	float getCurrentHealth() { return currentHealth; }
 
+
 	Vector2 lastPos{};
 	Rectangle getCollisionRec() override;
 private:
 
-	float healthMax{ 100 };
+	float healthMax{ 1 };
 	float currentHealth{ healthMax };
 	float damageCooldownMax{1.5f};
 	float damageCooldownCount{ 0 };
@@ -43,8 +45,6 @@ private:
 	float dt{ 0 };
 
 	Camera2D* gameCam;
-
-	
 };
 
 #endif

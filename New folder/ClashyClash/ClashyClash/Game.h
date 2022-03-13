@@ -10,6 +10,8 @@
 #include "WaveHandler.h"
 #include "TextureManager.h"
 #include <string>
+#define RAYGUI_IMPLEMENTATION 
+#include "raygui.h"
 
 
 class Game
@@ -42,6 +44,9 @@ private:
 	void EndDrawingGame();
 	void DrawMap();
 	void KeepCameraInWorld();
+	void ResetGame();
+
+	bool hasStarded{ false };
 
 	//Game values
 	Texture2D map{};
@@ -62,7 +67,5 @@ private:
 	float fireRate{ 0.3f };
 
 	float score{ 0 };
-
-	
 };
 

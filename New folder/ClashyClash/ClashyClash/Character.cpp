@@ -61,7 +61,6 @@ void Character::Move()
 	if (IsKeyDown(KEY_S)) moveVel.y += 1;
 	if (IsKeyDown(KEY_A)) moveVel.x -= 1;
 	if (IsKeyDown(KEY_D)) moveVel.x += 1;
-	
 
 	if(Vector2Length(moveVel) != 0.0f)
 	{
@@ -84,6 +83,14 @@ void Character::TakeDamage(const float damage)
 {
 	currentHealth -= damage;
 	damageCooldownCount = 0;
+}
+
+void Character::ResetValues(const Vector2 pos)
+{
+	currentHealth = healthMax;
+	position = pos;
+	
+	setAlive(true);
 }
 
 

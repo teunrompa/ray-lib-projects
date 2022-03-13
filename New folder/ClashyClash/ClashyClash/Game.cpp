@@ -1,19 +1,17 @@
 #include "Game.h"
 
-
-
 void Game::InitGame() 
 {
 	InitWindow(screenSize.x, screenSize.y, "Top down game");
 
 	textureManager.init();
-
+	
 	map = LoadTexture("nature_tileset/OpenWorldMap24x24.png"); //load the map texture
 	worldSize = Vector2{static_cast<float>(map.width) * mapScale, static_cast<float>(map.height) * mapScale}; //make the world size based on the map texture
 	worldBounds = {0,0, worldSize.x, worldSize.y};
 
 	//Init all the objects here...
-	player.Init(camera, Vector2{ screenSize.x / 2, screenSize.y / 2 }, textureManager.getPlayer());
+	player.Init(camera, Vector2{ worldSize.x / 2, worldSize.y / 2 }, textureManager.getPlayer());
 	cameraTargetOffset = player.texture.width / player.maxAnimationFrames;
 
 	//Game props
@@ -22,7 +20,7 @@ void Game::InitGame()
 
 	attack.Init(player.getPos(), 0.5f, 45, LoadTexture("sprites/swing_animation.png"));
 
-	//Wave handler & enemy template
+	//Wave handler made a copy because 
 	WaveHandler wave_handler{3,3, &enemies, textureManager.getTextureEnemy(), textureManager.getEnemyFrozen()};
 	waveHandler = wave_handler;
 }
@@ -73,9 +71,24 @@ void Game::KeepCameraInWorld()
 	}
 }
 
+void Game::ResetGame()
+{
+	player.ResetValues(Vector2{ worldSize.x / 2, worldSize.y / 2 });
+
+	//Reset the enemy count
+	std::vector<Enemy> emptyEnemies;
+	enemies = emptyEnemies;
+}
+
 //Write your Game Code here...
 void Game::UpdateGame()
 {
+	//strings need to be defined here because the Text needs to be reset each time
+	std::string healthString{ "Health: " };
+	healthString.append(std::to_string(player.getCurrentHealth()), 0, 5);
+
+	std::string scoreString{ "Score: " };
+	scoreString.append(std::to_string(score), 0, 5);
 
 	DrawGame();
 
@@ -97,7 +110,6 @@ void Game::UpdateGame()
 	{
 		player.UndoMovement();
 	}
-
 
 	//Loop trough props
 	for (auto prop : props)
@@ -161,14 +173,6 @@ void Game::UpdateGame()
 		}
 	}
 
-
-	//strings need to be defined here because the Text needs to be reset each time
-	std::string healthString{ "Health: " };
-	healthString.append(std::to_string(player.getCurrentHealth()), 0, 5);
-
-	std::string scoreString{ "Score: " };
-	scoreString.append(std::to_string(score), 0, 5);
-
 	if(!enemies.empty())
 	{
 		for (auto& enemy : enemies)
@@ -185,31 +189,36 @@ void Game::UpdateGame()
 				if(player.getDamageCooldown() > player.getDamageCooldownMax())
 				{
 					player.TakeDamage(25);
-					healthString.append(std::to_string(player.getCurrentHealth()));
 				}
 			}
 		}
 	}
 
 	if(player.getAlive())
+	{
 		attack.Update(player.getPos(), GetFrameTime(), player.getRotation());
+		//Draw health and score
+		Vector2 health_text_pos{ player.getPos().x - screenSize.x / 2 + 50, player.getPos().y - screenSize.y / 2 + 100 };
+		ShowMessage(healthString, health_text_pos, 20, WHITE);
+
+		Vector2 score_text_pos{ player.getPos().x + screenSize.x / 2 - 100, player.getPos().y - screenSize.y / 2 + 100 };
+		ShowMessage(scoreString, score_text_pos, 20, GREEN);
+	}
+
+	
 
 	if (!player.getAlive())
 	{
-		//DrawText("Game over", player.getPos().x - 100, player.getPos().y - 64, 40, RED);
-		ShowMessage("Game over", player.getPos(), 40, RED);
-
-		Vector2 score_text_pos_right{ player.getPos().x + screenSize.x / 2 - 100, player.getPos().y - screenSize.y + 200 };
+		Vector2 score_text_pos_right{ player.getPos().x - 40, player.getPos().y + 100 };
 		ShowMessage(scoreString, score_text_pos_right, 20, GREEN);
-	}
-	else
-	{
-		//Draw health and score
-		Vector2 health_text_pos{player.getPos().x - screenSize.x / 2 + 50, player.getPos().y - screenSize.y / 2 + 100};
-		ShowMessage(healthString, health_text_pos, 20, WHITE);
 
-		Vector2 score_text_pos { player.getPos().x + screenSize.x / 2 - 100, player.getPos().y - screenSize.y / 2 + 100};
-		ShowMessage(scoreString, score_text_pos, 20, GREEN);
+		Vector2 game_over_text_pos{ player.getPos().x - 155, player.getPos().y - 100 };
+		ShowMessage("Game Over! Press space to restart", game_over_text_pos, 20, RED);
+
+		if (IsKeyPressed(KEY_SPACE))
+		{
+			ResetGame();
+		}
 	}
 
 	KeepCameraInWorld();
