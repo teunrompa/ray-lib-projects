@@ -216,7 +216,7 @@ void Game::UpdateGame()
 						PlaySoundMulti(enemy_freeze);
 					}
 
-					projectiles[i].checkCollisionWith(&enemy);
+					projectiles[i].checkCollisionWith(&enemy); //TODO fix collision check	
 				}
 			}
 

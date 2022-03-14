@@ -34,7 +34,7 @@ void Attack::Update(Vector2 attackPos, const float dt, const float rotation)
 }
 
 /*
- * Draws the attack and checks for collisions
+ * Draws the attack and animates it
  */
 void Attack::DoAttack(Vector2 pos, const float rotation)
 {
@@ -48,6 +48,7 @@ void Attack::DoAttack(Vector2 pos, const float rotation)
 
 	runningTime += GetFrameTime();
 
+	//Animate
 	if (runningTime >= updateTime)
 	{
 		currentAnimationFrame++;
