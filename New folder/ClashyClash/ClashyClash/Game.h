@@ -10,6 +10,7 @@
 #include "WaveHandler.h"
 #include "TextureManager.h"
 #include <string>
+#include <fstream>
 
 class Game
 {
@@ -42,6 +43,8 @@ private:
 	void DrawMap();
 	void KeepCameraInWorld();
 	void ResetGame();
+	void SaveHighScore();
+	float getHighScore();
 
 	bool gameHasStarted{ false };
 
@@ -59,10 +62,17 @@ private:
 	TextureManager textureManager;
 	WaveHandler waveHandler{1,2, &enemies, textureManager.getTextureEnemy(), textureManager.getEnemyFrozen()};
 
+	Sound player_hit;
+	Sound enemy_die;
+	Sound projectile_fire;
+	Sound enemy_freeze;
+
 	//Fire logic
 	float coolDown{ 0 };
 	float fireRate{ 0.3f };
 
 	float score{ 0 };
+	float highScore;
+	bool highScoreSaved = false;
 };
 

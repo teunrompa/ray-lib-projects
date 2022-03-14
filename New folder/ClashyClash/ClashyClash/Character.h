@@ -35,7 +35,7 @@ public:
 	Rectangle getCollisionRec() override;
 private:
 
-	float healthMax{ 1 };
+	float healthMax{ 100 };
 	float currentHealth{ healthMax };
 	float damageCooldownMax{1.5f};
 	float damageCooldownCount{ 0 };

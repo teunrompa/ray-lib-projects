@@ -19,8 +19,10 @@ public:
 
 	virtual Rectangle getCollisionRec();
 	Vector2 getPos() { return position; }
+
 	bool getAlive() { return isAlive; }
 	void setAlive(const bool alive) { isAlive = alive; }
+	void setColor(Color color) { this->color = color; }
 
 	int maxAnimationFrames{ 4 };
 

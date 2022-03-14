@@ -12,7 +12,7 @@ Enemy::Enemy(Vector2 pos, Texture2D texture_idle, Texture2D texture_frozen)
 	this->width = texture_idle.width / maxAnimationFrames;
 	this->height = texture_idle.height;
 	updateTime = 0.2f;
-	speed = 300;
+	speed = GetRandomValue(200, 300);
 }
 
 void Enemy::Update(const float dt)

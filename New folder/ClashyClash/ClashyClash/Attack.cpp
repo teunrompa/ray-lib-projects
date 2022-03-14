@@ -1,7 +1,5 @@
 #include "Attack.h"
 
-#include <iostream>
-
 void Attack::Init(Vector2 position, float cooldown, float radius, Texture2D texture)
 {
 	this->position = position;
